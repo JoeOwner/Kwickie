@@ -1,0 +1,38 @@
+<form class="add-kwickie well" (submit)="addKwickie($event)">
+	<div class="form-group">
+		<div class="col-md-3">
+			<input type="text" [(ngModel)]="icon" name="icon" class="form-control" placeholder="Icon URL">
+		</div>
+		<div class="col-md-2">
+			<input type="text" [(ngModel)]="name" name="name" class="form-control" placeholder="Name">
+		</div>
+		<div class="col-md-1">
+			<input type="text" [(ngModel)]="id" name="id" class="form-control" placeholder="ID">
+		</div>
+		<div class="col-md-5">
+			<input type="text" [(ngModel)]="description" name="description" class="form-control" placeholder="Description">
+		</div>
+	</div>
+	<input type="submit" value="Add" class="btn">
+</form>
+
+<div class="task-list">
+	<div *ngFor="let kwickie of kwickies">
+		<div class="col-md-1">
+			<img src="{{kwickie.icon}}" class="icon"/>
+		</div>
+		<div class="col-md-2">
+			{{kwickie.name}}
+		</div>
+		<div class="col-md-1">
+			{{kwickie.id}}
+		</div>
+		<div class="col-md-6">
+			{{kwickie.description}}
+		</div>
+		<div class="col-md-1">
+			<input type="button" (click)="deleteKwickie(kwickie._id)" value="Delete" class="btn btn-danger">
+		</div>
+		<br /><br />
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<div>
+	<div *ngIf="loggedInUser">
+		Show Content of Kwickie Feed
+	</div>
+	<div *ngIf="!loggedInUser">
+		<h1>Login</h1>
+		<input [(ngModel)]="localUser.firstName" name="firstName" class="form-control" placeholder="First Name"/><br />
+		<input [(ngModel)]="localUser.lastName" name="lastName" class="form-control" placeholder="Last Name"/><br />
+		<input [(ngModel)]="localUser.email" name="email" class="form-control" placeholder="Email ddress"/><br />
+		<input [(ngModel)]="localUser.password" name="password" class="form-control" placeholder="Password"/><br />
+		<input type="button" (click)="loginUser(this)" [disabled]="loading" value="{{loading ? 'Loading...' : 'Register User'}}" class="btn btn-danger">
+		<div *ngIf="error" >
+			<p class="error-text">{{error.text}}</p>
+		</div>
+	</div>
+</div>

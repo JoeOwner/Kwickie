@@ -1,0 +1,11 @@
+.error-text{ 
+	color: red;
+}
+.icon{
+	height: 32px;
+	width: 32px;
+    margin-top: -7px;
+}
+.add-kwickie .btn{
+    margin-top: -15px;
+}
