@@ -12,7 +12,8 @@ router.post('/rego', function(req, res, next){
 	
 	request({
 	uri: 'https://www.giantbomb.com/api/search/api/Members',
-	qs: usr
+    	method: 'POST',
+	formData: usr
 	}).on('error', function(err) {
 		res.send(err);
 	}).pipe(res);
