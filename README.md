@@ -7,8 +7,6 @@ Navigate to ‘Kwickie’
 
 npm install
 
-bower install bootstrap 
-
 node server 
 
 
