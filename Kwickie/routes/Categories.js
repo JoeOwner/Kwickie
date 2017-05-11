@@ -7,8 +7,6 @@ var db = mongojs('mongodb://joeowner:joeowner@ds115071.mlab.com:15071/kwickie', 
 
 router.post('/rego', function(req, res, next){
 	var usr = req.body;
-
-	console.log(req.body);
 	
 	request({
 	uri: 'https://bigdev.kwickie.com/api/Members',

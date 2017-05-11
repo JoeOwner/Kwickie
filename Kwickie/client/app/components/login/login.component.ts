@@ -20,6 +20,7 @@ export class LoginComponent {
 	}
 	loggedInUser : User;
 	feeds : KwickieFeed[];
+
 	constructor( private kwickieService:KwickieService){
 		
 	};
@@ -37,7 +38,6 @@ export class LoginComponent {
 			return;
 		}
 		this.kwickieService.registerUser(usr).subscribe(user => {
-		console.log(user);
 			this.loginUser();
 		},
 		err => {
@@ -56,14 +56,9 @@ export class LoginComponent {
 
 	}
 	loginUser(){
-	console.log('login');
-	console.log(this.localUser);
 		var usr = this.localUser;
 
 		this.kwickieService.loginUser({ "email": this.localUser.email, "password": this.localUser.password }).subscribe(user => {
-
-		console.log("logged In");
-		console.log(user);
 			this.loggedInUser = user;
 			this.getFeed();
 		},
@@ -78,13 +73,7 @@ export class LoginComponent {
 	}
 
 	getFeed(){
-	console.log('get Feed');
-	console.log(this.loggedInUser.id);
-
 		this.kwickieService.getFeed(this.loggedInUser.id).subscribe(feed => {
-
-		console.log("Feed");
-		console.log(feed);
 			this.feeds = feed;
 			this.isLoggedIn = true;
 			this.loading = false;
