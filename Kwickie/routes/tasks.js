@@ -11,7 +11,7 @@ router.post('/rego', function(req, res, next){
 	console.log(req.body);
 	
 	request({
-	uri: 'https://www.giantbomb.com/api/search/api/Members',
+	uri: 'https://bigdev.kwickie.com/api/Members',
     	method: 'POST',
 	formData: usr
 	}).on('error', function(err) {
