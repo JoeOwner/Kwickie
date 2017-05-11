@@ -9,7 +9,6 @@ import { KwickieFeed } from '../../../model/KwickieFeed';
 	templateUrl: 'login.component.html'
 })
 export class LoginComponent {
-	isLoggedIn: boolean = false;
 	error;
 	loading = false;
 	localUser = {
@@ -75,7 +74,6 @@ export class LoginComponent {
 	getFeed(){
 		this.kwickieService.getFeed(this.loggedInUser.id).subscribe(feed => {
 			this.feeds = feed;
-			this.isLoggedIn = true;
 			this.loading = false;
 		},
 		err => {

@@ -1,5 +1,5 @@
-<div>
-	<div *ngIf="isLoggedIn">
+<div class="pad-top-20">
+	<div *ngIf="loggedInUser">
 		<h1>Kwickie Feeds</h1>
 		<div class="task-list">
 			<div *ngFor="let feed of feeds">
@@ -22,13 +22,31 @@
 			</div>
 		</div>
 	</div>
-	<div *ngIf="!isLoggedIn">
-		<h1>Login</h1>
-		<input [(ngModel)]="localUser.firstName" name="firstName" class="form-control" placeholder="First Name"/><br />
-		<input [(ngModel)]="localUser.lastName" name="lastName" class="form-control" placeholder="Last Name"/><br />
-		<input [(ngModel)]="localUser.email" name="email" class="form-control" placeholder="Email ddress"/><br />
-		<input [(ngModel)]="localUser.password" name="password" class="form-control" placeholder="Password"/><br />
-		<input type="button" (click)="registerUser()" [disabled]="loading" value="{{loading ? 'Loading...' : 'Register User'}}" class="btn btn-danger">
+	<div *ngIf="!loggedInUser">
+		<ul class="nav nav-tabs">
+		  <li class="active"><a data-toggle="tab" href="#login">Log In</a></li>
+		  <li><a data-toggle="tab" href="#signup">Sign Up</a></li>
+		</ul>
+		<div class="tab-content">
+		  <div id="login" class="tab-pane fade in active">
+		  	<div class="container">
+	    		<h1>Sign</h1>
+				<input [(ngModel)]="localUser.email" name="email" class="form-control" placeholder="Email ddress"/><br />
+				<input [(ngModel)]="localUser.password" name="password" class="form-control" placeholder="Password"/><br />
+				<input type="button" (click)="loginUser()" [disabled]="loading" value="{{loading ? 'Loading...' : 'Login'}}" class="btn btn-danger">
+		    </div>
+		  </div>
+		  <div id="signup" class="tab-pane fade">
+		    <div class="container">
+		    	<h1>Login</h1>
+				<input [(ngModel)]="localUser.firstName" name="firstName" class="form-control" placeholder="First Name"/><br />
+				<input [(ngModel)]="localUser.lastName" name="lastName" class="form-control" placeholder="Last Name"/><br />
+				<input [(ngModel)]="localUser.email" name="email" class="form-control" placeholder="Email ddress"/><br />
+				<input [(ngModel)]="localUser.password" name="password" class="form-control" placeholder="Password"/><br />
+				<input type="button" (click)="registerUser()" [disabled]="loading" value="{{loading ? 'Loading...' : 'Register User'}}" class="btn btn-danger">
+		    </div>
+		  </div>
+		</div>
 		<div *ngIf="error" >
 			<p class="error-text">{{error.text}}</p>
 		</div>

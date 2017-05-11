@@ -1,6 +1,12 @@
 .error-text{ 
 	color: red;
 }
+.pad-top-20{
+	padding-top: 20px;
+}
+
+
+
 .icon{
 	height: 32px;
 	width: 32px;

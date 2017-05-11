@@ -4,8 +4,6 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class KwickieService{
-	isLoggedIn : boolean = false;
-
 	constructor(private http:Http){
 		console.log('kwickie service initalized...');
 	}
