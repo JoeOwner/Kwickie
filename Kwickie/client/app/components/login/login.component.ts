@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { KwickieService } from '../../services/kwickie.service';
 import { User } from '../../../model/User';
+import { KwickieFeed } from '../../../model/KwickieFeed';
 
 @Component({
 	moduleId: module.id,
@@ -8,7 +9,7 @@ import { User } from '../../../model/User';
 	templateUrl: 'login.component.html'
 })
 export class LoginComponent {
-	loggedInUser: boolean = false;
+	isLoggedIn: boolean = false;
 	error;
 	loading = false;
 	localUser = {
@@ -17,12 +18,13 @@ export class LoginComponent {
 		email: "",
 		password: ""
 	}
-
+	loggedInUser : User;
+	feeds : KwickieFeed[];
 	constructor( private kwickieService:KwickieService){
 		
 	};
 
-	loginUser(){
+	registerUser(){
 		var usr = this.localUser;
 		this.loading = true;
 
@@ -34,12 +36,38 @@ export class LoginComponent {
 			this.loading = false;
 			return;
 		}
-		this.kwickieService.loginUser(usr).map(res => res.json()).subscribe(user => {
-			this.localUser = user;
-			this.loading = false;
+		this.kwickieService.registerUser(usr).subscribe(user => {
+		console.log(user);
+			this.loginUser();
 		},
 		err => {
-		console.log('hi');
+			this.loading = false;
+			console.log(err);
+			if(err.status === 422)
+				this.error={
+					text:"Email Address already exists"
+				};
+			else
+				this.error={
+					text:"There was an error Registering the User"
+				};
+		});
+
+
+	}
+	loginUser(){
+	console.log('login');
+	console.log(this.localUser);
+		var usr = this.localUser;
+
+		this.kwickieService.loginUser({ "email": this.localUser.email, "password": this.localUser.password }).subscribe(user => {
+
+		console.log("logged In");
+		console.log(user);
+			this.loggedInUser = user;
+			this.getFeed();
+		},
+		err => {
 			this.loading = false;
 			this.error={
 				text:"There was an error logging in"
@@ -48,5 +76,26 @@ export class LoginComponent {
 
 
 	}
-	
+
+	getFeed(){
+	console.log('get Feed');
+	console.log(this.loggedInUser.id);
+
+		this.kwickieService.getFeed(this.loggedInUser.id).subscribe(feed => {
+
+		console.log("Feed");
+		console.log(feed);
+			this.feeds = feed;
+			this.isLoggedIn = true;
+			this.loading = false;
+		},
+		err => {
+			this.loading = false;
+			this.error={
+				text:"There was an error getting the feed"
+			};
+		});
+
+
+	}
  }

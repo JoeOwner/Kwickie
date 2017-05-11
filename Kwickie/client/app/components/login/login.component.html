@@ -1,14 +1,34 @@
 <div>
-	<div *ngIf="loggedInUser">
-		Show Content of Kwickie Feed
+	<div *ngIf="isLoggedIn">
+		<h1>Kwickie Feeds</h1>
+		<div class="task-list">
+			<div *ngFor="let feed of feeds">
+				<div class="col-md-7">
+					To: {{feed.answerUser? feed.answerUser.firstName + " " + feed.answerUser.lastName : "Unknown User"}}
+					<br />
+					From: {{feed.questionUser? feed.questionUser.firstName + " " + feed.questionUser.lastName : "Unknown User"}}
+					<br />
+					Liked By {{feed.likesCount? feed.likesCount : 0}} Users
+					<br />
+					Message: {{feed.descriptionComment? feed.descriptionComment.message : ""}}
+				</div>
+				<div class="col-md-5">
+					<video width="400" controls>
+					  <source src="{{feed.kwickieVideo.highQualityUrl}}" type="video/mp4">
+					  Your browser does not support HTML5 video.
+					</video>
+				</div>
+				<br /><br />
+			</div>
+		</div>
 	</div>
-	<div *ngIf="!loggedInUser">
+	<div *ngIf="!isLoggedIn">
 		<h1>Login</h1>
 		<input [(ngModel)]="localUser.firstName" name="firstName" class="form-control" placeholder="First Name"/><br />
 		<input [(ngModel)]="localUser.lastName" name="lastName" class="form-control" placeholder="Last Name"/><br />
 		<input [(ngModel)]="localUser.email" name="email" class="form-control" placeholder="Email ddress"/><br />
 		<input [(ngModel)]="localUser.password" name="password" class="form-control" placeholder="Password"/><br />
-		<input type="button" (click)="loginUser(this)" [disabled]="loading" value="{{loading ? 'Loading...' : 'Register User'}}" class="btn btn-danger">
+		<input type="button" (click)="registerUser()" [disabled]="loading" value="{{loading ? 'Loading...' : 'Register User'}}" class="btn btn-danger">
 		<div *ngIf="error" >
 			<p class="error-text">{{error.text}}</p>
 		</div>
