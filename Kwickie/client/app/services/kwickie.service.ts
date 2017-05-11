@@ -18,23 +18,23 @@ export class KwickieService{
 	}
 
 	getKwickies(){
-		return this.http.get('/api/tasks').map(res => res.json())
+		return this.http.get('/api/Categories').map(res => res.json())
 	}
 
 	addKwickie(newKwickie){
 		var headers = new Headers();
 		headers.append('Content-Type', 'application/json');
-		return this.http.post('/api/task', JSON.stringify(newKwickie), {headers: headers}).map(res => res.json());
+		return this.http.post('/api/Categories', JSON.stringify(newKwickie), {headers: headers}).map(res => res.json());
 	}
 
 	deleteKwickie(id){
-		return this.http.delete('/api/task/' + id).map(res => res.json())
+		return this.http.delete('/api/Categories/' + id).map(res => res.json())
 	}
 
 	updateKwickie(kwickie){
 		var headers = new Headers();
 
 		headers.append('Content-Type', 'application/json');
-		return this.http.put('/api/task/' + kwickie._id, JSON.stringify(kwickie), {headers: headers}).map(res => res.json());
+		return this.http.put('/api/Categories/' + kwickie._id, JSON.stringify(kwickie), {headers: headers}).map(res => res.json());
 	}
 }

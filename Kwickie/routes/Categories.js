@@ -12,7 +12,7 @@ router.post('/rego', function(req, res, next){
 	
 	request({
 	uri: 'https://bigdev.kwickie.com/api/Members',
-    	method: 'POST',
+    method: 'POST',
 	formData: usr
 	}).on('error', function(err) {
 		res.send(err);
@@ -21,7 +21,7 @@ router.post('/rego', function(req, res, next){
 
 
 // get all kwickies
-router.get('/tasks', function(req, res, next){
+router.get('/Categories', function(req, res, next){
 	db.kwickies.find(function(err, kwickies){
 		if(err){
 			res.send(err);
@@ -31,7 +31,7 @@ router.get('/tasks', function(req, res, next){
 });
 
 // get ONE kwickie
-router.get('/tasks/:id', function(req, res, next){
+router.get('/Categories/:id', function(req, res, next){
 	db.kwickies.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, kwickie){
 		if(err){
 			res.send(err);
@@ -41,7 +41,7 @@ router.get('/tasks/:id', function(req, res, next){
 });
 
 //save kwickie
-router.post('/task', function(req, res, next){
+router.post('/Categories', function(req, res, next){
 	var kwickie = req.body;
 	if( !kwickie.name || !kwickie.id || !kwickie.icon || !kwickie.description )
 	{
@@ -61,7 +61,7 @@ router.post('/task', function(req, res, next){
 
 
 //Delete kwickie
-router.delete('/task/:id', function(req, res, next){
+router.delete('/Categories/:id', function(req, res, next){
 	db.kwickies.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, kwickie){
 		if(err){
 			res.send(err);
@@ -71,7 +71,7 @@ router.delete('/task/:id', function(req, res, next){
 });
 
 //Update
-router.put('/task/:id', function(req, res, next){
+router.put('/Categories/:id', function(req, res, next){
 	var kwickie = req.body
 	var updKwick = {};
 
